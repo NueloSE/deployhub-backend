@@ -20,8 +20,10 @@ export const registerService = async (req: Request, res: Response) => {
     res
       .status(201)
       .json({ message: "Service registered successfully", service });
-  } catch (error) {
-    res.status(500).json({ error: "Failed to register service" });
+  } catch (error: any) {
+    res
+      .status(500)
+      .json({ message: error.message, error: "Failed to register service" });
   }
 };
 
@@ -56,8 +58,8 @@ export const updateService = async (req: Request, res: Response) => {
     }
 
     res.json({ message: "Service updated", service });
-  } catch (error) {
-    res.status(500).json({ error: "Failed to update service" });
+  } catch (error:any) {
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -72,8 +74,7 @@ export const deleteService = async (req: Request, res: Response) => {
     }
 
     res.json({ message: "Service deleted successfully" });
-  } catch (error) {
-    res.status(500).json({ error: "Failed to delete service" });
+  } catch (error:any) {
+    res.status(500).json({ error: error.message });
   }
 };
-

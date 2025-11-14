@@ -18,6 +18,19 @@ export const getHealthStatus = async (req: Request, res: Response) => {
   const totalErrors = totalErrorsMetric?.values[0]?.value || 0;
   const errorRate = totalRequests > 0 ? (totalErrors / totalRequests) * 100 : 0;
 
+  let avgResponseTime = 0;
+
+  if (responseTimeMetric) {
+    const values = responseTimeMetric.values;
+    const sumEntry = values[values.length - 2];
+    const countEntry = values[values.length - 1];
+
+    const sum = sumEntry?.value || 0;
+    const count = countEntry?.value || 0;
+
+    avgResponseTime = count > 0 ? Number(((sum / count) * 1000).toFixed(2)) : 0;
+  }
+
   res.status(200).json({
     status: "ok",
     uptime: process.uptime(),
@@ -26,6 +39,7 @@ export const getHealthStatus = async (req: Request, res: Response) => {
     service: "DeployHub Backend API",
     totalRequests,
     errorRate,
+    avgResponseTime,
     responseTimeHistogram: responseTimeMetric || null,
   });
 };

@@ -185,6 +185,8 @@ docker compose up --build
 }
 ```
 
+[**API documentation**](https://documenter.getpostman.com/view/49262917/2sB3WvNeDN)
+
 ---
 
 ## Testing
@@ -216,7 +218,7 @@ Tests include:
 **Secrets required:**
 
 - `DOCKER_USERNAME` / `DOCKER_PASSWORD`
-- `RENDER_API_KEY` or `RAILWAY_API_KEY` (if deploying automatically)
+- `RENDER_API_KEY`
 
 ---
 
@@ -232,10 +234,10 @@ Tests include:
 
 ## Deployment
 
-- Deployed to Render / Railway (replace URL below):
+- Deployed to Render:
 
 ```
-Backend URL: https://deployhub-backend.onrender.com
+Backend URL: https://deployhub-backend-9aas.onrender.com/api
 ```
 
 - Connect frontend (React-Vite) to this backend for full observability dashboard.

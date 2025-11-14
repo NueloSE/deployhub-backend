@@ -1,12 +1,8 @@
-import express from "express";
-import client from "prom-client";
+import { Router } from "express";
+import { getMetrics } from "../controllers/metricsController";
 
-export const metricsRouter = express.Router();
+const router = Router();
 
-const register = new client.Registry();
-client.collectDefaultMetrics({ register });
+router.get("/metrics", getMetrics);
 
-metricsRouter.get("/", async (_, res) => {
-  res.set("Content-Type", register.contentType);
-  res.end(await register.metrics());
-});
+export default router

@@ -58,7 +58,7 @@ export const updateService = async (req: Request, res: Response) => {
     }
 
     res.json({ message: "Service updated", service });
-  } catch (error:any) {
+  } catch (error: any) {
     res.status(500).json({ error: error.message });
   }
 };
@@ -74,7 +74,7 @@ export const deleteService = async (req: Request, res: Response) => {
     }
 
     res.json({ message: "Service deleted successfully" });
-  } catch (error:any) {
+  } catch (error: any) {
     res.status(500).json({ error: error.message });
   }
 };

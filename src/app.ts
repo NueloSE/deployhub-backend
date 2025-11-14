@@ -2,11 +2,21 @@ import express from "express";
 import serviceRoutes from "./routes/servicesRoute";
 import { requestTimer } from "./middleware/requestTimer";
 import { metricsRouter } from "./routes/metricsRoute";
-import  healthRouter  from "./routes/healthRoute";
+import healthRouter from "./routes/healthRoute";
+import cors from "cors";
 
 const app = express();
 app.use(express.json());
 app.use(requestTimer);
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://deployhub-frontend.onrender.com",
+    ],
+    credentials: true,
+  })
+);
 
 app.use("/api/health", healthRouter);
 app.use("/api/services", serviceRoutes);
